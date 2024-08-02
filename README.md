@@ -14,7 +14,8 @@ Clone this repository, then run:
 
 ```bash
 export SP1_PRIVATE_KEY=<your SP1 private key starting with 0x>
-export LIGHT_NODE_URL=<the URL of a Celestia RPC, such as a light node>
+export LIGHT_NODE_URL=<the URL of a Celestia RPC, such as a light node, e.g. https://rpc.lunaroasis.net/>
+export TENDERMINT_RPC_URL=<the URL of a Celestia RPC, such as a light node, e.g. https://rpc.lunaroasis.net/>
 export TRUSTED_BLOCK=<the trusted block number, e.g. 1916121>
 export TARGET_BLOCK=<the target block number, e.g. 1916122>
 export NAMESPACE=<the Celestia namespace, e.g. 1935200000>

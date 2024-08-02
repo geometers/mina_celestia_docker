@@ -9,15 +9,12 @@ COPY ./private_repos/blob-stream-inclusion.tar.gz /
 # Copy the custom .env file (minus SP1_PRIVATE_KEY and LIGHT_NODE_URL)
 COPY ./blob_stream_inclusion_env /blob-stream-inclusion/.env
 
-# Copy the start script
-COPY ./start.sh /start.sh
-
 # Install system dependencies
-RUN apt -y update
-RUN apt install -y curl tar wget aria2 clang pkg-config libssl-dev jq \
+RUN apt-get -y -qq update
+RUN apt-get install -y -qq curl tar wget aria2 clang pkg-config libssl-dev jq \
                    build-essential git make ncdu cmake ninja-build \
                    protobuf-compiler && \
-    apt-get -y autoclean
+    apt -y -qq autoclean
 
 ## Copy the Node installer
 #COPY ./install_node.sh /install_node.sh
@@ -61,6 +58,12 @@ RUN cd /blob-stream-inclusion/blobstream/script && \
 
 RUN cd /blob-stream-inclusion/blob_inclusion/script && \
     cargo build --release --bin prove
+
+COPY ./bs_sample_proof.json /o1js-pairing/scripts/blobstream_example/blobstreamSP1Proof.json
+COPY ./bsi_sample_proof.json /o1js-pairing/scripts/blobstream_example/blobInclusionSP1Proof.json
+
+# Copy the start script
+COPY ./start.sh /start.sh
 
 CMD ["bash", "/start.sh"]
 #CMD ["sleep", "infinity"]
