@@ -18,7 +18,6 @@ tar -czf blob-stream-inclusion.tar.gz blob-stream-inclusion
 rm -rf o1js-pairing
 git clone git@github.com:geometers/o1js-pairing.git
 cd o1js-pairing
-git checkout feat/e2e_rollup
 rm -rf .git
 cd ..
 tar -czf o1js-pairing.tar.gz o1js-pairing
