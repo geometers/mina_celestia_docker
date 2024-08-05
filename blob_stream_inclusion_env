@@ -1,5 +1,4 @@
 # Do not write to this file; it will be modified by the Docker build script
 SP1_PROVER=network
 SKIP_SIMULATION=true
-LIGHT_NODE_AUTH_TOKEN=
 # Note that SP1_PRIVATE_KEY, TENDERMINT_RPC_URL, and LIGHT_NODE_URL will be written by ./start.sh

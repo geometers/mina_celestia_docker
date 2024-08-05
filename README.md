@@ -1,12 +1,21 @@
-<!--
-# Getting started
+# Docker setup for generating Celestia blobstream and blob inclusion proofs to run in Mina
 
-This repository is a sample application for users following the getting started guide at https://docs.docker.com/get-started/.
+This repository provides scripts that use Docker to generate Celestia
+blobstream and blob inclusion proofs. The scripts and Dockerfile produce a Docker image that
+handles all the system requirements.
 
-The application is based on the application from the getting started tutorial at https://github.com/docker/getting-started
--->
+You'll need:
 
-# Mina-Celestia DA (WIP: change title)
+1. A SP1 prover network private key
+2. The public URL of a Celestia light node, and its auth token (if any)
+3. The public URL of a Celestia full node
+
+You'll also need the following inputs to generate the proofs:
+
+1. The trusted Celestia block number
+2. The target Celestia block number
+3. The Celestia namespace
+4. The blob commitment
 
 ## Getting started
 
@@ -14,8 +23,9 @@ Clone this repository, then run:
 
 ```bash
 export SP1_PRIVATE_KEY=<your SP1 private key starting with 0x>
-export LIGHT_NODE_URL=<the URL of a Celestia RPC, such as a light node, e.g. https://rpc.lunaroasis.net/>
-export TENDERMINT_RPC_URL=<the URL of a Celestia RPC, such as a light node, e.g. https://rpc.lunaroasis.net/>
+export TENDERMINT_RPC_URL=<the URL of a Celestia RPC, which must not be a light node. e.g. https://rpc.lunaroasis.net/>
+export LIGHT_NODE_URL=<the URL of a Celestia a light node. Must not be a full node URL.>
+export LIGHT_NODE_AUTH_TOKEN=<the light node authentication token>
 export TRUSTED_BLOCK=<the trusted block number, e.g. 1916121>
 export TARGET_BLOCK=<the target block number, e.g. 1916122>
 export NAMESPACE=<the Celestia namespace, e.g. 1935200000>
