@@ -26,7 +26,7 @@ ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 # Install SP1
 RUN git clone https://github.com/succinctlabs/sp1.git
 RUN cd sp1 && \
-    git checkout v1.0.1 && \
+    git checkout v1.1.1 && \
     cd cli && \
     cargo install --locked --path . && \
     cd / && \

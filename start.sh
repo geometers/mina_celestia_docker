@@ -7,7 +7,8 @@ echo "TENDERMINT_RPC_URL=$TENDERMINT_RPC_URL" >> /blob-stream-inclusion/.env
 echo "LIGHT_NODE_AUTH_TOKEN=$LIGHT_NODE_AUTH_TOKEN" >> /blob-stream-inclusion/.env
 
 echo '[{"block_height": $TARGET_BLOCK, "commitment": $COMMITMENT, "namespace": "$NAMESPACE"}]' > /requests.json
-
+cp /blob-stream-inclusion/blobstream/script/proof-with-pis.json /o1js-pairing/scripts/blobstream_example/blobstreamSP1Proof.json
+cp /blob-stream-inclusion/blob_inclusion/script/proof-with-pis.json /o1js-pairing/scripts/blobstream_example/blobInclusionSP1Proof.json
 
 echo "Blobstream"
 echo
@@ -25,8 +26,13 @@ cargo run --release -- \
     --num-requests=1 \
     --request-path=/requests.json
 
+cp /blob-stream-inclusion/blobstream/script/proof-with-pis.json /o1js-pairing/scripts/blobstream_example/blobstreamSP1Proof.json
+cp /blob-stream-inclusion/blob_inclusion/script/proof-with-pis.json /o1js-pairing/scripts/blobstream_example/blobInclusionSP1Proof.json
+
 export MAX_THREADS=4
 cd /o1js-pairing/scripts/blobstream_example/ && \
     bash ./e2e_blobstream_inclusion.sh
 
-# TODO: copy the final proof(s) to /output
+# Copy the final proof(s) to /output
+cp run/blobInclusion/e2e_plonk/plonk/recursion/proofs/layer5/p0.json /output/blob_inclusion_p0.json
+cp run/blobstream/e2e_plonk/plonk/recursion/proofs/layer5/p0.json /output/blobstream_p0.json
