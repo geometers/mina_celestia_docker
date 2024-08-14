@@ -15,5 +15,6 @@ docker run \
     --env TARGET_BLOCK=$TARGET_BLOCK \
     --env NAMESPACE=$NAMESPACE \
     --env COMMITMENT=$COMMITMENT \
-      --mount type=bind,source="$(pwd)"/output,target=/output/ \
+    --mount type=bind,source="$(pwd)"/output,target=/output/ \
+    -v /var/run/docker.sock:/var/run/docker.sock \
     mina_celestia 

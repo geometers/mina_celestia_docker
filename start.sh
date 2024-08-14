@@ -6,13 +6,14 @@ echo "LIGHT_NODE_URL=$LIGHT_NODE_URL" >> /blob-stream-inclusion/.env
 echo "TENDERMINT_RPC_URL=$TENDERMINT_RPC_URL" >> /blob-stream-inclusion/.env
 echo "LIGHT_NODE_AUTH_TOKEN=$LIGHT_NODE_AUTH_TOKEN" >> /blob-stream-inclusion/.env
 
-echo '[{"block_height": $TARGET_BLOCK, "commitment": $COMMITMENT, "namespace": "$NAMESPACE"}]' > /requests.json
-cp /blob-stream-inclusion/blobstream/script/proof-with-pis.json /o1js-pairing/scripts/blobstream_example/blobstreamSP1Proof.json
-cp /blob-stream-inclusion/blob_inclusion/script/proof-with-pis.json /o1js-pairing/scripts/blobstream_example/blobInclusionSP1Proof.json
+echo [{\"block_height\": $TARGET_BLOCK, \"commitment\": \"$COMMITMENT\", \"namespace\": \"$NAMESPACE\"}] > /requests.json
+
+sleep infinity
 
 echo "Blobstream"
 echo
 cd /blob-stream-inclusion/blobstream/script
+
 cargo run --release -- \
     --trusted-block=$TRUSTED_BLOCK \
     --target-block=$TARGET_BLOCK
@@ -20,6 +21,7 @@ cargo run --release -- \
 echo "Blob inclusion"
 echo
 cd /blob-stream-inclusion/blob_inclusion/script
+rm requests.json
 cargo run --release -- \
     --start-height=$TRUSTED_BLOCK \
     --end-height=$TARGET_BLOCK \
