@@ -33,3 +33,5 @@ export COMMITMENT=<the blob commitment, e.g. 9f2d95f144e4f7e6beb24197eceb69c78c1
 ./build.sh
 ./run.sh
 ```
+
+The compressed proofs will be in the `output/` directory.

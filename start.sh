@@ -34,5 +34,7 @@ cd /o1js-pairing/scripts/blobstream_example/ && \
     bash ./e2e_blobstream_inclusion.sh
 
 # Copy the final proof(s) to /output
-cp run/blobInclusion/e2e_plonk/plonk/recursion/proofs/layer5/p0.json /output/blob_inclusion_p0.json
-cp run/blobstream/e2e_plonk/plonk/recursion/proofs/layer5/p0.json /output/blobstream_p0.json
+cp /o1js-pairing/scripts/blobstream_example/run/blobInclusion/e2e_plonk/plonk/recursion/proofs/layer5/p0.json \
+        /output/blob_inclusion_p0.json
+cp /o1js-pairing/scripts/blobstream_example/run/blobstream/e2e_plonk/plonk/recursion/proofs/layer5/p0.json \
+        /output/blobstream_p0.json
