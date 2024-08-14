@@ -8,8 +8,6 @@ echo "LIGHT_NODE_AUTH_TOKEN=$LIGHT_NODE_AUTH_TOKEN" >> /blob-stream-inclusion/.e
 
 echo [{\"block_height\": $TARGET_BLOCK, \"commitment\": \"$COMMITMENT\", \"namespace\": \"$NAMESPACE\"}] > /requests.json
 
-sleep infinity
-
 echo "Blobstream"
 echo
 cd /blob-stream-inclusion/blobstream/script
