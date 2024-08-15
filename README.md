@@ -34,4 +34,6 @@ export COMMITMENT=<the blob commitment, e.g. 9f2d95f144e4f7e6beb24197eceb69c78c1
 ./run.sh
 ```
 
-The compressed proofs will be in the `output/` directory.
+The compressed proofs will be in the `output/` directory. Note that the above
+`TRUSTED_BLOCK` and `TARGET_BLOCK` numbers, along as the `NAMESPACE` and
+`COMMITMENT` will just work, and you only need your own `SP1_PRIVATE_KEY`.
