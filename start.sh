@@ -15,7 +15,7 @@ cd /blob-stream-inclusion/blobstream/script
 # Needed to print cycles
 RUST_LOG=info
 
-cargo run --release -- \
+cargo run --release --features native-gnark -- \
     --trusted-block=$TRUSTED_BLOCK \
     --target-block=$TARGET_BLOCK
 
@@ -23,7 +23,7 @@ echo "Blob inclusion"
 echo
 cd /blob-stream-inclusion/blob_inclusion/script
 rm requests.json
-cargo run --release -- \
+cargo run --release --features native-gnark -- \
     --start-height=$TRUSTED_BLOCK \
     --end-height=$TARGET_BLOCK \
     --num-requests=1 \
@@ -38,5 +38,5 @@ cd /o1js-blobstream/scripts/blobstream_example/ && \
     bash ./e2e_blobstream_inclusion.sh
 
 # Copy the final proof(s) to /output
-cp /o1js-pairing/scripts/blobstream_example/run/blobInclusion/e2e_plonk/plonk/recursion/proofs/layer5/p0.json \
-cp /o1js-pairing/scripts/blobstream_example/run/blobstream/e2e_plonk/plonk/recursion/proofs/layer5/p0.json \
+cp /o1js-blobstream/scripts/blobstream_example/run/blobInclusion/e2e_plonk/proofs/layer5/p0.json /output/blob_inclusion_proof.json
+cp /o1js-blobstream/scripts/blobstream_example/run/blobstream/e2e_plonk/proofs/layer5/p0.json /output/blobstream_proof.json
