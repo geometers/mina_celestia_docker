@@ -12,6 +12,9 @@ echo "Blobstream"
 echo
 cd /blob-stream-inclusion/blobstream/script
 
+# Needed to print cycles
+RUST_LOG=info
+
 cargo run --release -- \
     --trusted-block=$TRUSTED_BLOCK \
     --target-block=$TARGET_BLOCK
@@ -26,6 +29,7 @@ cargo run --release -- \
     --num-requests=1 \
     --request-path=/requests.json
 
+echo "Running e2e_blobstream_inclusion.sh"
 cp /blob-stream-inclusion/blobstream/script/proof-with-pis.json /o1js-pairing/scripts/blobstream_example/blobstreamSP1Proof.json
 cp /blob-stream-inclusion/blob_inclusion/script/proof-with-pis.json /o1js-pairing/scripts/blobstream_example/blobInclusionSP1Proof.json
 
@@ -34,7 +38,5 @@ cd /o1js-pairing/scripts/blobstream_example/ && \
     bash ./e2e_blobstream_inclusion.sh
 
 # Copy the final proof(s) to /output
-cp /o1js-pairing/scripts/blobstream_example/run/blobInclusion/e2e_plonk/plonk/recursion/proofs/layer5/p0.json \
-        /output/blob_inclusion_p0.json
-cp /o1js-pairing/scripts/blobstream_example/run/blobstream/e2e_plonk/plonk/recursion/proofs/layer5/p0.json \
-        /output/blobstream_p0.json
+echo "Copying proofs (JSON files) from /o1js-pairing/scripts/blobstream_example/run/ to output/"
+cp /o1js-pairing/scripts/blobstream_example/run/*.json /output/

@@ -15,6 +15,7 @@ then
     rm -rf blob-stream-inclusion
     git clone git@github.com:geometers/blob-stream-inclusion.git
     cd blob-stream-inclusion
+    git checkout feat/native-gnark
     rm -rf .git
     cd ..
     tar -czf $b_src blob-stream-inclusion

@@ -47,6 +47,15 @@ run cd /o1js-pairing/contracts && \
     npm install && \
     npm run build
 
+# Install go
+RUN wget -q "https://golang.org/dl/go1.22.0.linux-amd64.tar.gz"
+RUN rm -rf /go && \
+    tar -C / -xzf "go1.22.0.linux-amd64.tar.gz"
+
+ENV GOROOT /go
+ENV GOPATH /go/bin
+ENV PATH /go/bin:$PATH
+
 # Unpack blob-stream-inclusion and build
 RUN tar xf /blob-stream-inclusion.tar.gz && \
     rm /blob-stream-inclusion.tar.gz
