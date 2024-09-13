@@ -26,10 +26,11 @@ export SP1_PRIVATE_KEY=<your SP1 private key starting with 0x>
 export TENDERMINT_RPC_URL=<the URL of a Celestia RPC, which must not be a light node. e.g. https://rpc.lunaroasis.net/>
 export LIGHT_NODE_URL=<the URL of a Celestia a light node. Must not be a full node URL.>
 export LIGHT_NODE_AUTH_TOKEN=<the light node authentication token>
-export TRUSTED_BLOCK=<the trusted block number, e.g. 1916121>
-export TARGET_BLOCK=<the target block number, e.g. 1916122>
-export NAMESPACE=<the Celestia namespace, e.g. 1935200000>
-export COMMITMENT=<the blob commitment, e.g. 9f2d95f144e4f7e6beb24197eceb69c78c101ae6827e0e4ec8037612e405319d>
+export TRUSTED_BLOCK=<the trusted block number, e.g. 1865870>
+export TARGET_BLOCK=<the target block number, e.g. 1865890>
+export COMMITMENT_BLOCK=<the target block number, e.g. 1865877>
+export NAMESPACE=<the Celestia namespace, e.g. 240713>
+export COMMITMENT=<the blob commitment, e.g. d374153c3e49fcaf0de6cc972da43d1b312bd3dbd5c9926c85c00758c2d2cf2d>
 ./build.sh
 ./run.sh
 ```

@@ -13,6 +13,7 @@ docker run \
     --env SP1_PRIVATE_KEY=$SP1_PRIVATE_KEY \
     --env TRUSTED_BLOCK=$TRUSTED_BLOCK \
     --env TARGET_BLOCK=$TARGET_BLOCK \
+    --env COMMITMENT_BLOCK=$COMMITMENT_BLOCK \
     --env NAMESPACE=$NAMESPACE \
     --env COMMITMENT=$COMMITMENT \
     --mount type=bind,source="$(pwd)"/output,target=/output/ \

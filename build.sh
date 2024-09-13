@@ -21,15 +21,15 @@ then
     tar -czf $b_src blob-stream-inclusion
 fi
 
-o_src="o1js-pairing.tar.gz"
+o_src="o1js-blobstream.tar.gz"
 if [ ! -f $o_src ]
 then
-    rm -rf o1js-pairing
-    git clone git@github.com:geometers/o1js-pairing.git
-    cd o1js-pairing
+    rm -rf o1js-blobstream
+    git clone git@github.com:geometers/o1js-blobstream.git
+    cd o1js-blobstream
     rm -rf .git
     cd ..
-    tar -czf $o_src o1js-pairing
+    tar -czf $o_src o1js-blobstream
 fi
 
 cd ..

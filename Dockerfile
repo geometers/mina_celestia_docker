@@ -11,6 +11,10 @@ RUN apt-get install -y -qq curl tar wget aria2 clang pkg-config libssl-dev jq \
                    protobuf-compiler && \
     apt -y -qq autoclean
 
+COPY --from=golang:1.22.7-bookworm /usr/local/go/ /usr/local/go/
+ 
+ENV PATH /usr/local/go/bin:$PATH
+
 ENV NVM_DIR /root/.nvm
 ENV NODE_VERSION 22.5.1
 RUN wget --quiet https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh && \
@@ -33,28 +37,19 @@ RUN cd sp1 && \
     cargo prove install-toolchain
 
 # Copy private repos which build.sh should have cloned and compressed
-COPY ./private_repos/o1js-pairing.tar.gz /
+COPY ./private_repos/o1js-blobstream.tar.gz /
 COPY ./private_repos/blob-stream-inclusion.tar.gz /
 
 # Copy the custom (stripped-down) .env file
 COPY ./blob_stream_inclusion_env /blob-stream-inclusion/.env
 
-# Unpack the o1js-pairing and build
-run tar xf /o1js-pairing.tar.gz && \
-    rm /o1js-pairing.tar.gz
+# Unpack the o1js-blobstream and build
+run tar xf /o1js-blobstream.tar.gz && \
+    rm /o1js-blobstream.tar.gz
 
-run cd /o1js-pairing/contracts && \
+run cd /o1js-blobstream/contracts && \
     npm install && \
     npm run build
-
-# Install go
-RUN wget -q "https://golang.org/dl/go1.22.0.linux-amd64.tar.gz"
-RUN rm -rf /go && \
-    tar -C / -xzf "go1.22.0.linux-amd64.tar.gz"
-
-ENV GOROOT /go
-ENV GOPATH /go/bin
-ENV PATH /go/bin:$PATH
 
 # Unpack blob-stream-inclusion and build
 RUN tar xf /blob-stream-inclusion.tar.gz && \
@@ -68,8 +63,8 @@ RUN cd /blob-stream-inclusion/blob_inclusion/script && \
     cargo build --release --features native-gnark --bin prove
 
 # For testing only
-#COPY ./bs_sample_proof.json /o1js-pairing/scripts/blobstream_example/blobstreamSP1Proof.json
-#COPY ./bsi_sample_proof.json /o1js-pairing/scripts/blobstream_example/blobInclusionSP1Proof.json
+#COPY ./bs_sample_proof.json /o1js-blobstream/scripts/blobstream_example/blobstreamSP1Proof.json
+#COPY ./bsi_sample_proof.json /o1js-blobstream/scripts/blobstream_example/blobInclusionSP1Proof.json
 
 # Copy the start script
 COPY ./start.sh /start.sh
