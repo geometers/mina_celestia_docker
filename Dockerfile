@@ -62,6 +62,13 @@ RUN cd /blob-stream-inclusion/blobstream/script && \
 RUN cd /blob-stream-inclusion/blob_inclusion/script && \
     cargo build --release --features native-gnark --bin prove
 
+# Download SP1 plonk bn256 artifacts
+RUN mkdir -p /root/.sp1/circuits/plonk_bn254/v1.1.0 && \
+    cd /root/.sp1/circuits/plonk_bn254/v1.1.0 && \
+    wget -q https://sp1-circuits.s3-us-east-2.amazonaws.com/v1.1.0.tar.gz && \
+    tar xf v1.1.0.tar.gz && \
+    rm v1.1.0.tar.gz
+
 # For testing only
 #COPY ./bs_sample_proof.json /o1js-blobstream/scripts/blobstream_example/blobstreamSP1Proof.json
 #COPY ./bsi_sample_proof.json /o1js-blobstream/scripts/blobstream_example/blobInclusionSP1Proof.json
