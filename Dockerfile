@@ -53,10 +53,10 @@ RUN tar xf /blob-stream-inclusion.tar.gz && \
 
 # Build the proving scripts
 RUN cd /blob-stream-inclusion/blobstream/script && \
-    cargo build --release --bin prove
+    cargo build --release --features native-gnark --bin prove
 
 RUN cd /blob-stream-inclusion/blob_inclusion/script && \
-    cargo build --release --bin prove
+    cargo build --release --features native-gnark --bin prove
 
 # For testing only
 #COPY ./bs_sample_proof.json /o1js-pairing/scripts/blobstream_example/blobstreamSP1Proof.json
