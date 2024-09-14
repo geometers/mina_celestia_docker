@@ -15,7 +15,7 @@ then
     rm -rf blob-stream-inclusion
     git clone git@github.com:geometers/blob-stream-inclusion.git
     cd blob-stream-inclusion
-    git checkout eb56c30b185c5e1515485f23e350465cd2c72899
+    git checkout 109720c08a9426dc62eb6c76ff757b7655d2feba
     rm -rf .git
     cd ..
     tar -czf $b_src blob-stream-inclusion
@@ -28,7 +28,7 @@ then
     rm -rf o1js-blobstream
     git clone git@github.com:geometers/o1js-blobstream.git
     cd o1js-blobstream
-    git checkout 49bf10bde47fe69929a419523038d85c677e0e7a
+    git checkout 840dc4032238a11ac9f129f29286f55272c5b975
     rm -rf .git
     cd ..
     tar -czf $o_src o1js-blobstream

@@ -30,8 +30,8 @@ ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 # Install SP1
 RUN git clone https://github.com/succinctlabs/sp1.git
 RUN cd sp1 && \
-    git checkout v1.1.1 && \
-    cd cli && \
+    git checkout v2.0.0 && \
+    cd crates/cli && \
     cargo install --locked --path . && \
     cd / && \
     cargo prove install-toolchain
@@ -63,11 +63,11 @@ RUN cd /blob-stream-inclusion/blob_inclusion/script && \
     cargo build --release --features native-gnark --bin prove
 
 # Download SP1 plonk bn256 artifacts
-RUN mkdir -p /root/.sp1/circuits/plonk_bn254/v1.1.0 && \
-    cd /root/.sp1/circuits/plonk_bn254/v1.1.0 && \
-    wget -q https://sp1-circuits.s3-us-east-2.amazonaws.com/v1.1.0.tar.gz && \
-    tar xf v1.1.0.tar.gz && \
-    rm v1.1.0.tar.gz
+RUN mkdir -p /root/.sp1/circuits/plonk_bn254/v2.0.0 && \
+    cd /root/.sp1/circuits/plonk_bn254/v2.0.0 && \
+    wget -q https://sp1-circuits.s3-us-east-2.amazonaws.com/v2.0.0.tar.gz && \
+    tar xf v2.0.0.tar.gz && \
+    rm v2.0.0.tar.gz
 
 # For testing only
 #COPY ./bs_sample_proof.json /o1js-blobstream/scripts/blobstream_example/blobstreamSP1Proof.json
