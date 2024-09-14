@@ -63,8 +63,8 @@ RUN cd /blob-stream-inclusion/blob_inclusion/script && \
     cargo build --release --features native-gnark --bin prove
 
 # Download SP1 plonk bn256 artifacts
-RUN mkdir -p /root/.sp1/circuits/plonk_bn254/v2.0.0 && \
-    cd /root/.sp1/circuits/plonk_bn254/v2.0.0 && \
+RUN mkdir -p /root/.sp1/circuits/v2.0.0 && \
+    cd /root/.sp1/circuits/v2.0.0 && \
     wget -q https://sp1-circuits.s3-us-east-2.amazonaws.com/v2.0.0.tar.gz && \
     tar xf v2.0.0.tar.gz && \
     rm v2.0.0.tar.gz
