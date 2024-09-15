@@ -23,8 +23,8 @@ RUST_LOG=info ./target/release/prove \
     --num-requests=1 \
     --request-path=/requests.json
 
-if [ ! -f /blob-stream-inclusion/blobstream/script/proof-with-pis.json ]; then
-    echo "Blobstream proof could not be generated"
+if [ ! -f /blob-stream-inclusion/blob_inclusion/script/proof-with-pis.json ]; then
+    echo "Blob inclusion proof could not be generated"
     exit 1
 fi
 
@@ -36,8 +36,8 @@ RUST_LOG=info ./target/release/prove \
     --trusted-block=$TRUSTED_BLOCK \
     --target-block=$TARGET_BLOCK
 
-if [ ! -f /blob-stream-inclusion/blob_inclusion/script/proof-with-pis.json ]; then
-    echo "Blob inclusion proof could not be generated"
+if [ ! -f /blob-stream-inclusion/blobstream/script/proof-with-pis.json ]; then
+    echo "Blobstream proof could not be generated"
     exit 1
 fi
 
