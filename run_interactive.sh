@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-## To run in detached mode, it's recommended to disable the final command in the build script (CMD ["bash", "/start.sh"])
+## To run in interactive mode, it's recommended to disable the final command in the build script (CMD ["bash", "/start.sh"])
 
 # Change to the directory that this script lives in
 cd $(dirname "$0")
@@ -8,8 +8,8 @@ cd $(dirname "$0")
 mkdir -p output
 
 # Run the docker image
-docker run \
-    -d -it \
+container_id=$(docker run \
+    -itd \
     --env TENDERMINT_RPC_URL=$TENDERMINT_RPC_URL \
     --env LIGHT_NODE_URL=$LIGHT_NODE_URL \
     --env LIGHT_NODE_AUTH_TOKEN=$LIGHT_NODE_AUTH_TOKEN \
@@ -20,4 +20,9 @@ docker run \
     --env COMMITMENT=$COMMITMENT \
     --env COMMITMENT_BLOCK=$COMMITMENT_BLOCK \
     --mount type=bind,source="$(pwd)"/output,target=/output/ \
-    mina_celestia 
+    mina_celestia)
+
+echo "Container ID: $container_id"
+
+# run the interactive shell
+docker exec -it $container_id /bin/bash
