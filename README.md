@@ -24,7 +24,7 @@ Clone this repository, then run:
 ```bash
 export SP1_PRIVATE_KEY=<your SP1 private key starting with 0x>
 export TENDERMINT_RPC_URL=<the URL of a Celestia RPC, which must not be a light node. e.g. https://rpc.lunaroasis.net/>
-export LIGHT_NODE_URL=<the URL of a Celestia a light node. Must not be a full node URL.>
+export LIGHT_NODE_URL=<the URL of a Celestia a light node. Must not be a full node URL. If using docker for mac, or docker for windows, host.docker.internal can replace localhost for a node running on host machine>
 export LIGHT_NODE_AUTH_TOKEN=<the light node authentication token>
 export TRUSTED_BLOCK=<the trusted block number, e.g. 1865870>
 export TARGET_BLOCK=<the target block number, e.g. 1865890>

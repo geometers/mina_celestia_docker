@@ -48,6 +48,11 @@ rm /o1js-blobstream/scripts/blobstream_example/blobInclusionSP1Proof.json
 cp /blob-stream-inclusion/blobstream/script/proof-with-pis.json /o1js-blobstream/scripts/blobstream_example/blobstreamSP1Proof.json
 cp /blob-stream-inclusion/blob_inclusion/script/proof-with-pis.json /o1js-blobstream/scripts/blobstream_example/blobInclusionSP1Proof.json
 
+echo "Copying the SP1 proofs to output"
+echo
+cp /blob-stream-inclusion/blobstream/script/proof-with-pis.json /output/blobstreamSP1Proof.json
+cp /blob-stream-inclusion/blob_inclusion/script/proof-with-pis.json /output/blobInclusionSP1Proof.json
+
 echo "Running e2e_blobstream_inclusion.sh"
 echo
 export MAX_THREADS=4
