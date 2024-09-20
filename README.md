@@ -31,6 +31,7 @@ export TARGET_BLOCK=<the target block number, e.g. 1865890>
 export COMMITMENT_BLOCK=<the target block number, e.g. 1865877>
 export NAMESPACE=<the Celestia namespace, e.g. 240713>
 export COMMITMENT=<the blob commitment, e.g. d374153c3e49fcaf0de6cc972da43d1b312bd3dbd5c9926c85c00758c2d2cf2d>
+export MAX_THREADS=4
 rm -rf private_repos && ./build.sh
 ./run.sh
 ```
@@ -38,3 +39,5 @@ rm -rf private_repos && ./build.sh
 The compressed proofs will be in the `output/` directory. Note that the above
 `TRUSTED_BLOCK`, `TARGET_BLOCK`, `COMMITMENT_BLOCK`, `NAMESPACE`, and
 `COMMITMENT` will just work, and you only need your own `SP1_PRIVATE_KEY` and `LIGHT_NODE_URL`.
+
+Note: we utilize parallelism to decrease the latency at the cost of higher RAM requirements. This parameter can be tuned by changing `MAX_THREADS`. `MAX_THREADS` will run proofs sequentially, and has similar RAM requiremenets to an o1js prover.

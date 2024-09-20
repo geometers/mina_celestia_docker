@@ -55,7 +55,7 @@ cp /blob-stream-inclusion/blob_inclusion/script/proof-with-pis.json /output/blob
 
 echo "Running e2e_blobstream_inclusion.sh"
 echo
-export MAX_THREADS=4
+export MAX_THREADS=${MAX_THREADS:-4}
 cd /o1js-blobstream/scripts/blobstream_example/ && \
     bash ./e2e_blobstream_inclusion.sh
 

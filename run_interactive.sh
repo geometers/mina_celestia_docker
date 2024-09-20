@@ -19,6 +19,7 @@ container_id=$(docker run \
     --env NAMESPACE=$NAMESPACE \
     --env COMMITMENT=$COMMITMENT \
     --env COMMITMENT_BLOCK=$COMMITMENT_BLOCK \
+    --env MAX_THREADS=$MAX_THREADS \
     --mount type=bind,source="$(pwd)"/output,target=/output/ \
     mina_celestia)
 
