@@ -33,8 +33,13 @@ RUN cd sp1 && \
     git checkout v2.0.0 && \
     cd crates/cli && \
     cargo install --locked --path . && \
+    rm -rf target/release/build && \
+    rm -rf target/release/examples && \
+    rm -rf target/release/deps && \
+    rm -rf target/release/incremental && \
     cd / && \
-    cargo prove install-toolchain
+    cargo prove install-toolchain && \
+    rm -rf /.sp1/rust-toolchain-x86_64-unknown-linux-gnu.tar.gz
 
 # Copy private repos which build.sh should have cloned and compressed
 COPY ./private_repos/o1js-blobstream.tar.gz /
@@ -57,17 +62,27 @@ RUN tar xf /blob-stream-inclusion.tar.gz && \
 
 # Build the proving scripts
 RUN cd /blob-stream-inclusion/blobstream/script && \
-    cargo build --release --features native-gnark --bin prove
+    cargo build --release --features native-gnark --bin prove && \
+    rm -rf target/release/build && \
+    rm -rf target/release/examples && \
+    rm -rf target/release/deps && \
+    rm -rf target/release/incremental
 
 RUN cd /blob-stream-inclusion/blob_inclusion/script && \
-    cargo build --release --features native-gnark --bin prove
+    cargo build --release --features native-gnark --bin prove && \
+    rm -rf target/release/build && \
+    rm -rf target/release/examples && \
+    rm -rf target/release/deps && \
+    rm -rf target/release/incremental
 
 # Download SP1 plonk bn256 artifacts
 RUN mkdir -p /root/.sp1/circuits/v2.0.0 && \
     cd /root/.sp1/circuits/v2.0.0 && \
     wget -q https://sp1-circuits.s3-us-east-2.amazonaws.com/v2.0.0.tar.gz && \
     tar xf v2.0.0.tar.gz && \
-    rm v2.0.0.tar.gz
+    rm v2.0.0.tar.gz && \
+    rm /root/.sp1/circuits/v2.0.0/groth16_pk.bin && \
+    rm /root/.sp1/circuits/v2.0.0/plonk_pk.bin
 
 # For testing only
 #COPY ./bs_sample_proof.json /o1js-blobstream/scripts/blobstream_example/blobstreamSP1Proof.json

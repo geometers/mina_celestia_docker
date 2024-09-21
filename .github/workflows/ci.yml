@@ -1,0 +1,106 @@
+name: CI
+run-name: ${{ github.actor }} is testing out mina-celestia-docker
+on: [push]
+#on:
+  #push:
+    #branches: [ "main" ]
+  #pull_request:
+    #branches: [ "main" ]
+
+jobs:
+  build_and_run:
+    runs-on: ubuntu-latest
+    steps:
+      #-
+        #name: Print secrets and variables
+        #run: |
+          #echo $LIGHT_NODE_URL
+          #echo $LIGHT_NODE_AUTH_TOKEN
+          #echo $TENDERMINT_RPC_URL
+          #echo $TRUSTED_BLOCK
+          #echo $TARGET_BLOCK
+          #echo $NAMESPACE
+          #echo $COMMITMENT
+          #echo $COMMITMENT_BLOCK
+        #env:
+          #SP1_PRIVATE_KEY: ${{ secrets.SP1_PRIVATE_KEY }}
+          #LIGHT_NODE_URL: ${{ secrets.LIGHT_NODE_URL }}
+          #LIGHT_NODE_AUTH_TOKEN: ${{ secrets.LIGHT_NODE_AUTH_TOKEN }}
+          #TENDERMINT_RPC_URL: ${{ vars.TENDERMINT_RPC_URL }}
+          #TRUSTED_BLOCK: ${{ vars.TRUSTED_BLOCK }}
+          #TARGET_BLOCK: ${{ vars.TARGET_BLOCK }}
+          #NAMESPACE: ${{ vars.NAMESPACE }}
+          #COMMITMENT: ${{ vars.COMMITMENT }}
+          #COMMITMENT_BLOCK: ${{ vars.COMMITMENT_BLOCK }}
+
+      - 
+        name: Checkout code
+        uses: actions/checkout@v4
+
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      -
+        name: Clear up disk space
+        run: |
+          echo "free space:"
+          df -h
+          bash ./ci_free_disk_space.sh
+          echo "free space:"
+          df -h
+
+      - 
+        name: Clear up disk space #2
+        uses: jlumbroso/free-disk-space@main
+        with:
+          # this might remove tools that are actually needed,
+          # if set to "true" but frees about 6 GB
+          tool-cache: false
+          
+          # all of these default to true, but feel free to set to
+          # "false" if necessary for your workflow
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: true
+          swap-storage: true
+
+      -
+        name: Build Docker image
+        working-directory: .
+        run: |
+          bash ./build.sh
+
+      -
+        name: Generate proofs
+        working-directory: .
+        run: |
+          bash ./run.sh
+        env:
+          MAX_THREADS: 2
+          SP1_PRIVATE_KEY: ${{ secrets.SP1_PRIVATE_KEY }}
+          LIGHT_NODE_URL: ${{ secrets.LIGHT_NODE_URL }}
+          LIGHT_NODE_AUTH_TOKEN: ${{ secrets.LIGHT_NODE_AUTH_TOKEN }}
+          TENDERMINT_RPC_URL: ${{ vars.TENDERMINT_RPC_URL }}
+          TRUSTED_BLOCK: ${{ vars.TRUSTED_BLOCK }}
+          TARGET_BLOCK: ${{ vars.TARGET_BLOCK }}
+          NAMESPACE: ${{ vars.NAMESPACE }}
+          COMMITMENT: ${{ vars.COMMITMENT }}
+          COMMITMENT_BLOCK: ${{ vars.COMMITMENT_BLOCK }}
+
+      #- 
+        #name: Build Docker Image
+        #if: steps.cache-primes.outputs.cache-hit != 'true'
+        #working-directory: .
+        #run: |
+          #bash ./build.sh
+
+      #-
+        #name: Cache Docker build
+        #id: cache-docker-build
+        #uses: actions/cache@v4
+        #with:
+          #path: docker-build
+          #key: ${{ runner.os }}-docker-build
