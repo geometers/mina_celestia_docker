@@ -67,8 +67,23 @@ jobs:
           docker-images: true
           swap-storage: true
 
+      #-
+        #name: Build Docker image
+        #working-directory: .
+        #run: |
+          #bash ./build.sh
+
       -
-        name: Build Docker image
+        name: Cache Docker build
+        id: cache-docker-build
+        uses: actions/cache@v4
+        with:
+          path: docker-build
+          key: ${{ runner.os }}-docker-build
+
+      - 
+        name: Build Docker Image
+        if: steps.cache-docker-build.outputs.cache-hit != 'true'
         working-directory: .
         run: |
           bash ./build.sh
@@ -89,18 +104,3 @@ jobs:
           NAMESPACE: ${{ vars.NAMESPACE }}
           COMMITMENT: ${{ vars.COMMITMENT }}
           COMMITMENT_BLOCK: ${{ vars.COMMITMENT_BLOCK }}
-
-      #- 
-        #name: Build Docker Image
-        #if: steps.cache-primes.outputs.cache-hit != 'true'
-        #working-directory: .
-        #run: |
-          #bash ./build.sh
-
-      #-
-        #name: Cache Docker build
-        #id: cache-docker-build
-        #uses: actions/cache@v4
-        #with:
-          #path: docker-build
-          #key: ${{ runner.os }}-docker-build
