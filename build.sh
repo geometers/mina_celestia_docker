@@ -28,7 +28,7 @@ then
     rm -rf o1js-blobstream
     git clone https://github.com/geometers/o1js-blobstream.git
     cd o1js-blobstream
-    git checkout 2c2ec2b07c13b67e7804dc36c9761018c3976718
+    git checkout 905821de40a44aed1635482aac13e884d43d09e1
     rm -rf .git
     cd ..
     tar -czf $o_src o1js-blobstream
